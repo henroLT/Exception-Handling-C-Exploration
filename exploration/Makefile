@@ -1,21 +1,20 @@
 # Compiler
 CC = gcc
 
-# Collect all .c files
-SRCS = $(wildcard *.c)
-# Executable names go into bin/ (same names as source without .c)
-BINS = $(patsubst %.c,bin/%,$(SRCS))
+# Find all .c files in subdirectories (ignore bin/)
+SRCS := $(shell find . -mindepth 2 -type f -name "*.c" ! -path "./bin/*")
+
+# Map source files to bin/ equivalents
+BINS := $(SRCS:./% = bin/%)
+BINS := $(BINS:.c=)
 
 # Default target: build all executables
 all: $(BINS)
 
-# Rule to build each executable into bin/
-bin/%: %.c | bin
-	$(CC) -o $@ $<
-
-# Ensure bin directory exists
-bin:
-	mkdir -p bin
+# Compile each .c directly into bin/
+bin/%: %  # % matches the path relative to current dir
+	@mkdir -p "$(dir $@)"
+	$(CC) -o "$@" "$<"
 
 # Clean up
 clean:
