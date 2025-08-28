@@ -16,7 +16,7 @@ void int_to_str(unsigned int n, char *buf, size_t *len) {
 }
 
 void handle(int sig) {
-    const char msg[] = "I'm doomed, the OS will kill me - remember me... PID: ";
+    const char msg[] = "I'm doomed, the OS will kill me... YOU knew this would happen, why do this to me? \nRemember me at least... PID: ";
     char pid[20];
     size_t pidLen;
     int_to_str(getpid(), pid, &pidLen);
