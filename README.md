@@ -1,2 +1,1 @@
-# Shelly
-Command Shell
+# Exception Handling + Cpp Lower Level Exploration
